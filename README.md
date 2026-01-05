@@ -2,7 +2,7 @@
 
 ![Status](https://img.shields.io/badge/Status-Work_in_Progress-yellow?style=flat)
 ![Version](https://img.shields.io/badge/Version-1.0-blue?style=flat)
-![License](https://img.shields.io/badge/License-MIT-green?style=flat)
+<!--![License](https://img.shields.io/badge/License-MIT-green?style=flat)-->
 
 ## Project Overview
 
