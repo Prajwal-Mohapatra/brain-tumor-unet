@@ -6,22 +6,15 @@ from config import config
 from data_preprocess import data_generator
 
 def get_scan_ids(log_file, root_dir):
-    """
-    Helper to get scan IDs from a CSV log or by listing directories.
-    """
+    """Helper to get scan IDs from a CSV log or by listing directories."""
     if os.path.exists(log_file):
         try:
             df = pd.read_csv(log_file)
-            # Assumption: The first column usually contains IDs or there's a specific naming convention.
-            # If CSV read fails to provide IDs, fallback to folder listing.
-            # Here we assume the CSV might list folder names.
-            # If specific column unknown, we just return folder listing to be robust.
             pass 
         except:
             pass
             
     # ROBUST FALLBACK: List directories
-    # This is often safer if the CSV format varies
     scan_ids = [d for d in os.listdir(root_dir) 
                 if os.path.isdir(os.path.join(root_dir, d)) and "BraTS" in d]
     return sorted(scan_ids)
@@ -36,7 +29,8 @@ def get_train_val_datasets():
     if not all_ids:
         raise ValueError(f"No data found in {config.TRAIN_VAL_DIR}")
 
-    print(f"Found {len(all_ids)} scans for Training/Validation.")
+    # One patient = One sample (Stacked 4 channels)
+    print(f"Found {len(all_ids)} scans. Generating {len(all_ids)} training samples (4-Channel).")
     
     # Split
     train_ids, val_ids = train_test_split(
@@ -46,6 +40,8 @@ def get_train_val_datasets():
     )
     
     # Define Signature
+    # X shape: (H, W, 4) because we stack 4 modalities
+    # Y shape: (H, W, 4) for one-hot mask
     output_signature = (
         tf.TensorSpec(shape=(config.IMG_HEIGHT, config.IMG_WIDTH, config.NUM_CHANNELS), dtype=tf.float32),
         tf.TensorSpec(shape=(config.IMG_HEIGHT, config.IMG_WIDTH, config.NUM_CLASSES), dtype=tf.float32)
@@ -78,7 +74,7 @@ def get_test_dataset():
     if not test_ids:
         raise ValueError(f"No data found in {config.TEST_DIR}")
 
-    print(f"Found {len(test_ids)} scans for Testing.")
+    print(f"Found {len(test_ids)} scans for Testing ({len(test_ids)} examples).")
 
     output_signature = (
         tf.TensorSpec(shape=(config.IMG_HEIGHT, config.IMG_WIDTH, config.NUM_CHANNELS), dtype=tf.float32),

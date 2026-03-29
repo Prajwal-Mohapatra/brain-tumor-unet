@@ -40,8 +40,8 @@ def decoder_block(input_tensor, skip_tensor, num_filters, dropout_rate=0.0):
 def build_unet():
     """
     U-Net with 5 Encoders and 5 Decoders (Deep U-Net)
-    Input shape: (240, 240, 4)
-    Output shape: (240, 240, 4)
+    Input shape: (256, 256, 1)
+    Output shape: (256, 256, 4)
     """
     inputs = Input((config.IMG_HEIGHT, config.IMG_WIDTH, config.NUM_CHANNELS))
     
@@ -76,7 +76,7 @@ def build_unet():
     # Softmax for multi-class segmentation (Background, NCR, ED, ET)
     outputs = Conv2D(config.NUM_CLASSES, (1, 1), activation='softmax')(d1)
     
-    model = Model(inputs=[inputs], outputs=[outputs], name="UNet_5Layer_BraTS")
+    model = Model(inputs=[inputs], outputs=[outputs], name="UNet_SingleModality")
     return model
 
 if __name__ == "__main__":
