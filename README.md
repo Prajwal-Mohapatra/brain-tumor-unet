@@ -1,14 +1,14 @@
 # Brain Tumor Segmentation using U-Net
 
 ![Status](https://img.shields.io/badge/Status-Work_in_Progress-yellow?style=flat)
-![Version](https://img.shields.io/badge/Version-3.0-blue?style=flat)
+![Version](https://img.shields.io/badge/Version-4.0-blue?style=flat)
 <!--![License](https://img.shields.io/badge/License-MIT-green?style=flat)-->
 
 ## Project Overview
 
 This project focuses on building a Deep Learning model capable of analyzing brain Magnetic Resonance Imaging (MRI) scans to predict and segment tumor regions. Using the **BRATS (Brain Tumor Segmentation)** dataset, the work explores the potential of Semantic Segmentation techniques.
 
-The primary objective is to accurately mask tumor areas using a **U-Net** architecture. The project currently implements a standard U-Net and aims to explore advanced variations (such as Attention U-Net or Residual U-Net) in future iterations.
+The primary objective is to accurately mask tumor areas using a **U-Net** architecture. The project currently implements a standard U-Net and Attention U-Net and aims to explore advanced variations in future iterations.
 
 ## Tech Stack & Tools
 
@@ -19,17 +19,16 @@ The primary objective is to accurately mask tumor areas using a **U-Net** archit
 ![Jupyter Notebook](https://img.shields.io/badge/jupyter-%23FA0F00.svg?style=flat&logo=jupyter&logoColor=white)
 
 
-## Results (Version 3)
+## Results (Version 4)
 
-The current iteration (v3) utilizes a standard U-Net architecture.
+The current iteration (v4) utilizes a Attention U-Net architecture.
 
 | Metric | Score |
 | :--- | :--- |
-| **Accuracy** | **98.9%** |
-| **Dice Coefficient** | **0.95** |
+| **Accuracy** | **99.35%** |
+| **Dice Coefficient** | **0.9063** |
 
 
 ## Roadmap & Future Work
 
-This project is currently **Active and Under Development**. Frequent updates are expected.
-
+This project is currently **Active and Under Development**.
